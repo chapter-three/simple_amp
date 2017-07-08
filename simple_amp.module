@@ -1,0 +1,51 @@
+<?php
+
+use Drupal\Core\Url;
+use Drupal\simple_amp\AmpBase;
+
+/**
+ * Implements hook_page_attachments().
+ */
+function simple_amp_page_attachments(array &$page) {
+  if ($entity = \Drupal::routeMatch()->getParameter('node')) {
+    if ((new AmpBase())->setEntity($entity)->isAmpEnabled()) {
+      // Add path to AMP version of articles
+      $options = ['absolute' => TRUE];
+      $url = Url::fromRoute('simple_amp.amp', ['entity' => $entity->id()], $options);
+      $amp_link = [
+        '#tag'        => 'link',
+        '#attributes' => [
+          'rel'  => 'amphtml',
+          'href' => $url->toString(),
+        ],
+      ];
+      $page['#attached']['html_head'][] = [$amp_link, 'amp_link'];
+    }
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function simple_amp_theme($existing, $type, $theme, $path) {
+  return [
+    'amp' => [
+      'variables' => [
+        'params'  => [],
+        'title'   => NULL,
+        'entity'  => NULL,
+        'content' => NULL,
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function simple_amp_theme_suggestions_amp_alter(array &$suggestions, array $variables) {
+  $entity = $variables['entity'];
+  // Add template suggestions based on the entity type and entity bundle.
+  $suggestions[] = 'amp__' . $entity->getEntityTypeId();
+  $suggestions[] = 'amp__' . $entity->getEntityTypeId() . '__' . $entity->bundle();
+}

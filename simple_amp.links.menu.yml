@@ -1,0 +1,5 @@
+simple_amp.settings:
+  title: 'Simple AMP'
+  description: 'Configure Simple AMP settings.'
+  route_name: simple_amp.settings
+  parent: 'system.admin_config_services'
