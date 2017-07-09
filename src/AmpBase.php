@@ -17,6 +17,7 @@ class AmpBase {
   protected $entity;
   protected $view_mode;
   protected $content;
+  protected $html;
 
   // Default and absolutely must scripts.
   protected $scripts = [
@@ -101,13 +102,23 @@ class AmpBase {
     $view_builder = \Drupal::entityTypeManager()->getViewBuilder($this->getEntity()->getEntityTypeId());
     $node = $view_builder->view($this->getEntity(), $this->getViewMode(), $langcode);
     $html = \Drupal::service('renderer')->render($node);
-    return $html->__toString();
+    return $this->html = $html->__toString();
   }
 
   protected function detect() {
     // @TODO: detect if there is any need to add extra JS to support
     // additional elements.
-    $content = $this->getContent();
+    $youtube = [
+      '/youtube\.com\/watch\?v=([a-z0-9\-_]+)/i',
+      '/youtube\.com\/embed\/([a-z0-9\-_]+)/i',
+      '/youtu.be\/([a-z0-9\-_]+)/i',
+      '/youtube\.com\/v\/([a-z0-9\-_]+)/i',
+    ];
+    foreach ($youtube as $regexp) {
+      if (preg_match($regexp, $this->html)) {
+        $this->scripts[] = '<script async custom-element="amp-youtube" src="https://cdn.ampproject.org/v0/amp-youtube-0.1.js"></script>';
+      }
+    }
   }
 
 }
