@@ -7,9 +7,9 @@ use Drupal\Component\Annotation\Plugin;
 /**
  * Defines AMP Component annotation object.
  *
- * Plugin Namespace: Plugin\simple_amp\VideoFilter
+ * Plugin Namespace: Plugin\simple_amp\AmpComponent
  *
- * @see \Drupal\simple_amp\Plugin\VideoFilterManager
+ * @see \Drupal\simple_amp\Plugin\AmpComponentManager
  * @see plugin_api
  *
  * @Annotation

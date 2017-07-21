@@ -4,10 +4,6 @@ namespace Drupal\simple_amp;
 
 use Lullabot\AMP\AMP;
 use Drupal\Core\Url;
-use Drupal\simple_amp\Metadata\Metadata;
-use Drupal\simple_amp\Metadata\Author;
-use Drupal\simple_amp\Metadata\Publisher;
-use Drupal\simple_amp\Metadata\Image;
 
 /**
  * Parse content and detect if there is any JS should be added
@@ -18,7 +14,9 @@ class AmpBase {
   protected $view_mode;
   protected $content;
   protected $html;
-  protected $plugin_manager;
+
+  protected $component_manager;
+  protected $metadata_manager;
 
   // Default and absolutely must scripts.
   protected $scripts = [
@@ -26,7 +24,8 @@ class AmpBase {
   ];
 
   public function __construct() {
-    $this->plugin_manager = \Drupal::service('plugin.manager.simple_amp');
+    $this->component_manager = \Drupal::service('plugin.manager.simple_amp_component');
+    $this->metadata_manager = \Drupal::service('plugin.manager.simple_amp_metadata');
   }
 
   public function setEntity($entity) {
@@ -66,28 +65,16 @@ class AmpBase {
 
   public function getMetadata() {
     $entity = $this->getEntity();
-    $metadata = new Metadata();
-    $author = (new Author())
-      ->setName('Test Author');
-    $logo = (new Image())
-      ->setUrl('http://url-to-image')
-      ->setWidth(400)
-      ->setHeight(300);
-    $publisher = (new Publisher())
-      ->setName('MyWebsite.com')
-      ->setLogo($logo);
-    $image = (new Image())
-      ->setUrl('http://url-to-image')
-      ->setWidth(400)
-      ->setHeight(300);
-    $metadata
-      ->setDatePublished($entity->getCreatedTime())
-      ->setDateModified($entity->getChangedTime())
-      ->setDescription('test')
-      ->setAuthor($author)
-      ->setPublisher($publisher)
-      ->setImage($image);
-    return json_encode($metadata->build());
+    $manager = $this->metadata_manager;
+    $plugins = $manager->getDefinitions();
+    foreach ($plugins as $id => $plugin) {
+      $plugin = $manager->createInstance($plugin['id']);
+      $entity_types = $plugin->getEntityTypes($entity);
+      if (in_array($entity->bundle(), $entity_types)) {
+        $metadata = $plugin->getMetadata($entity);
+        return json_encode($metadata);
+      }
+    }
   }
 
   public function parse() {
@@ -107,7 +94,7 @@ class AmpBase {
   }
 
   protected function detect() {
-    $manager = $this->plugin_manager;
+    $manager = $this->component_manager;
     $plugins = $manager->getDefinitions();
 
     // Find component.
