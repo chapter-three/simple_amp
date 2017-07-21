@@ -18,15 +18,16 @@ class AmpBase {
   protected $view_mode;
   protected $content;
   protected $html;
+  protected $plugin_manager;
 
   // Default and absolutely must scripts.
   protected $scripts = [
     '<script async src="https://cdn.ampproject.org/v0.js"></script>',
-    '<script async custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js"></script>',
-    '<script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"></script>',
-    '<script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>',
-    '<script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>',
   ];
+
+  public function __construct() {
+    $this->plugin_manager = \Drupal::service('plugin.manager.simple_amp');
+  }
 
   public function setEntity($entity) {
     $this->entity = $entity;
@@ -106,19 +107,40 @@ class AmpBase {
   }
 
   protected function detect() {
-    // @TODO: detect if there is any need to add extra JS to support
-    // additional elements.
-    $youtube = [
-      '/youtube\.com\/watch\?v=([a-z0-9\-_]+)/i',
-      '/youtube\.com\/embed\/([a-z0-9\-_]+)/i',
-      '/youtu.be\/([a-z0-9\-_]+)/i',
-      '/youtube\.com\/v\/([a-z0-9\-_]+)/i',
-    ];
-    foreach ($youtube as $regexp) {
-      if (preg_match($regexp, $this->html)) {
-        $this->scripts[] = '<script async custom-element="amp-youtube" src="https://cdn.ampproject.org/v0/amp-youtube-0.1.js"></script>';
+    $manager = $this->plugin_manager;
+    $plugins = $manager->getDefinitions();
+
+    // Find component.
+    foreach ($plugins as $id => $plugin) {
+      $plugin = $manager->createInstance($plugin['id']);
+
+      $regexp = $plugin->getRegexp();
+
+      if ($plugin->isDefault()) {
+        if ($element = $plugin->getElement()) {
+          $this->scripts[] = $element;
+        }
       }
+
+      $component = [];
+      if (!is_array($regexp)) {
+        $component['regexp'][] = $regexp;
+      }
+      else {
+        $component['regexp'] = $regexp;
+      }
+
+      // Try all regular expressions.
+      foreach ($component['regexp'] as $delta => $regexp) {
+        if (preg_match($regexp, $this->html, $matches)) {
+          if ($element = $plugin->getElement()) {
+            $this->scripts[] = $element;
+          }
+        }
+      }
+
     }
+
   }
 
 }

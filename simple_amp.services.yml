@@ -1,0 +1,4 @@
+services:
+  plugin.manager.simple_amp:
+    class: Drupal\simple_amp\AmpComponentManager
+    parent: default_plugin_manager
