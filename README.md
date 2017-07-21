@@ -6,6 +6,8 @@ The module is extendable, there are two components: AmpComponent and AmpMetadata
 
 Read blog post about this module: [How to implement simple AMP support in Drupal 8](https://www.chapterthree.com/blog/how-implement-simple-amp-support-drupal-8)
 
+This module has been released on Drupal.org, see [Simple AMP](https://goo.gl/UNR6m4) project page.
+
 ## AMPComponent
 
 1. All plugins stored in src/Plugin/AmpComponent/* currently the module doesn't support all available AMP components, but can be easily extended from your own module.
