@@ -9,16 +9,16 @@ use Drupal\simple_amp\Metadata\Publisher;
 use Drupal\simple_amp\Metadata\Image;
 
 /**
- * Default AMP metadata component.
+ * Example AMP metadata component.
  *
  * @AmpMetadata(
  *   id = "default",
  *   entity_types = {
- *     "test_article"
+ *     "example_article"
  *   }
  * )
  */
-class Defatult extends AmpMetadataBase {
+class ExampleEntity extends AmpMetadataBase {
 
   /**
    * {@inheritdoc}
