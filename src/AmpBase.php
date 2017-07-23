@@ -17,6 +17,8 @@ class AmpBase {
 
   protected $component_manager;
   protected $metadata_manager;
+  protected $config;
+  protected $ga;
 
   // Default and absolutely must scripts.
   protected $scripts = [
@@ -26,6 +28,8 @@ class AmpBase {
   public function __construct() {
     $this->component_manager = \Drupal::service('plugin.manager.simple_amp_component');
     $this->metadata_manager = \Drupal::service('plugin.manager.simple_amp_metadata');
+    $this->config = \Drupal::config('simple_amp.settings');
+    $this->ga = \Drupal::config('google_analytics.settings')->get('account');
   }
 
   public function setEntity($entity) {
@@ -52,15 +56,15 @@ class AmpBase {
   }
 
   public function getViewMode() {
-    return \Drupal::config('simple_amp.settings')->get($this->getEntity()->bundle() . '_view_mode');
+    return $this->config->get($this->getEntity()->bundle() . '_view_mode');
   }
 
   public function isAmpEnabled() {
-    return (bool) \Drupal::config('simple_amp.settings')->get($this->getEntity()->bundle() . '_enable');
+    return (bool) $this->config->get($this->getEntity()->bundle() . '_enable');
   }
 
   public function getGoogleAnalytics() {
-    return \Drupal::config('google_analytics.settings')->get('account');
+    return $this->ga;
   }
 
   public function getMetadata() {
