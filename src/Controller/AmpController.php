@@ -7,11 +7,24 @@ use Drupal\Core\Controller\ControllerBase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Drupal\Core\Render\Renderer;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\simple_amp\AmpBase;
 
 class AMPController extends ControllerBase {
 
   protected $amp;
+  protected $renderer;
+
+  public function __construct(Renderer $render) {
+    $this->renderer = $render;
+  }
+
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('renderer')
+    );
+  }
 
   /**
    * AMP version of the node.
@@ -23,7 +36,7 @@ class AMPController extends ControllerBase {
         ->parse();
       if ($this->amp->isAmpEnabled()) {
         $response = new Response();
-        $markup = \Drupal::service('renderer')->render($this->assembleAmpPage());
+        $markup = $this->renderer->render($this->assembleAmpPage());
         $response->setContent($markup->__toString());
         return $response;
       }
