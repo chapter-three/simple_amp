@@ -1,4 +1,4 @@
-# Simple AMP integration Drupal 8 module
+# Simple AMP (Accelerated Mobile Pages) integration Drupal 8 module
 
 Module requires `composer require lullabot/amp` [https://github.com/Lullabot/amp-library](https://github.com/Lullabot/amp-library)
 
@@ -8,7 +8,7 @@ Read blog post about this module: [How to implement simple AMP support in Drupal
 
 This module has been released on Drupal.org, see [Simple AMP](https://goo.gl/UNR6m4) project page.
 
-## AMPComponent
+## AmpComponent
 
 1. All plugins stored in src/Plugin/AmpComponent/* currently the module doesn't support all available AMP components, but can be easily extended from your own module.
 
