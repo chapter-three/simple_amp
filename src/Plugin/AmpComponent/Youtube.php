@@ -12,10 +12,7 @@ use Drupal\simple_amp\AmpComponentBase;
  *   name = @Translation("YouTube"),
  *   default = false,
  *   regexp = {
- *     "/youtube\.com\/watch\?v=([a-z0-9\-_]+)/i",
- *     "/youtube\.com\/embed\/([a-z0-9\-_]+)/i",
- *     "/youtu.be\/([a-z0-9\-_]+)/i",
- *     "/youtube\.com\/v\/([a-z0-9\-_]+)/i",
+ *     "/<amp\-youtube.*><\/amp\-youtube>/isU",
  *   }
  * )
  */

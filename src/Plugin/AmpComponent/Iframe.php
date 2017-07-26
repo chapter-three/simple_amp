@@ -12,7 +12,7 @@ use Drupal\simple_amp\AmpComponentBase;
  *   name = @Translation("Iframe"),
  *   default = false,
  *   regexp = {
- *     "/<iframe.*src=.*><\/iframe>/isU",
+ *     "/<amp\-iframe.*><\/amp\-iframe>/isU",
  *   }
  * )
  */
