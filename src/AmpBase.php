@@ -123,7 +123,7 @@ class AmpBase {
 
       // Try all regular expressions.
       foreach ($component['regexp'] as $delta => $regexp) {
-        if (preg_match($regexp, $this->html, $matches)) {
+        if (preg_match($regexp, $this->html, $matches) || preg_match($regexp, $this->content, $matches)) {
           if ($element = $plugin->getElement()) {
             $this->scripts[] = $element;
           }
