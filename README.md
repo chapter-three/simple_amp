@@ -15,7 +15,14 @@ This module has been released on Drupal.org, see [Simple AMP](https://goo.gl/UNR
 - Open Simple AMP Settings page and enable entity type that supports AMP and choose `Display Mode` for it. `/admin/config/services/simple-amp`.
 - Hit `Save configuration` and you're all set.
 
-## AmpComponent
+## Theming
+
+- Modify template in `simple_amp/templates/amp.html.twig` to match your design 
+- You may also have custom template per content type: `amp--node.html.twig` or `amp--node--article.html.twig`
+
+## Plugins
+
+### AmpComponent
 
 All plugins stored in src/Plugin/AmpComponent/* currently the module doesn't support all available AMP components, but can be easily extended from your own module.
 
@@ -58,7 +65,7 @@ class Youtube extends AmpComponentBase {
 }
 ```
 
-## AmpMetadata
+### AmpMetadata
 
 All plugins stored in src/Plugin/AmpMetadata/* provide Metadata for specific entity.
 
@@ -121,12 +128,5 @@ class ExampleEntity extends AmpMetadataBase {
 
 }
 ```
-
-
-
-## Theming
-
-1. Modify template in `simple_amp/templates/amp.html.twig` to match your design 
-2. You may also have custom template per content type: `amp--node.html.twig` or `amp--node--article.html.twig`
 
 Module developed by [Minnur Yunusov](https://www.minnur.com) at [Chapter Three](https://www.chapterthree.com)
