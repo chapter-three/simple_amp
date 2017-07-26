@@ -85,6 +85,11 @@ class AmpBase {
     $amp = new AMP();
     $amp->loadHtml($this->renderEntityViewMode());
     $this->content = $amp->convertToAmpHtml();
+    if ($scripts = $amp->getComponentJs()) {
+      foreach ($scripts as $id => $src) {
+        $this->scripts[] = '<script  async custom-element="' . $id . '" src="' . $src . '"></script>';
+      }
+    }
     $this->detect();
     return $this;
   }
