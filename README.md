@@ -8,9 +8,16 @@ Read blog post about this module: [How to implement simple AMP support in Drupal
 
 This module has been released on Drupal.org, see [Simple AMP](https://goo.gl/UNR6m4) project page.
 
+## How to Use
+
+- Create new `Display Mode` for your entity that will support AMP. New View modes can be created via `/admin/structure/display-modes/view`.
+- Enable newly created View mode on entity `Manage Display` page. Example path: `/admin/structure/types/manage/article/display`
+- Open Simple AMP Settings page and enable entity type that supports AMP and choose `Display Mode` for it. `/admin/config/services/simple-amp`.
+- Hit `Save configuration` and you're all set.
+
 ## AmpComponent
 
-1. All plugins stored in src/Plugin/AmpComponent/* currently the module doesn't support all available AMP components, but can be easily extended from your own module.
+All plugins stored in src/Plugin/AmpComponent/* currently the module doesn't support all available AMP components, but can be easily extended from your own module.
 
 Here is example:
 
@@ -53,7 +60,7 @@ class Youtube extends AmpComponentBase {
 
 ## AmpMetadata
 
-1. All plugins stored in src/Plugin/AmpMetadata/* provide Metadata for specific entity.
+All plugins stored in src/Plugin/AmpMetadata/* provide Metadata for specific entity.
 
 Here is example:
 
