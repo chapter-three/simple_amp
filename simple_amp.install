@@ -25,3 +25,40 @@ function simple_amp_requirements($phase) {
   }
   return $requirements;
 }
+
+/**
+ * Implements hook_schema().
+ */
+function simple_amp_schema() {
+  $schema['simple_amp_disabled'] = [
+    'description' => 'Store information about AMP disabled nodes.',
+    'fields' => [
+      'nid' => [
+        'description' => 'Node ID',
+        'type'        => 'int',
+        'unsigned'    => TRUE,
+        'not null'    => TRUE,
+        'default'     => 0,
+      ],
+    ],
+    'primary key' => ['nid'],
+    'indexes' => [
+      'nid'  => ['nid'],
+    ],
+    'foreign keys' => [
+      'nid' => [
+        'node' => 'nid'
+      ],
+    ],
+  ];
+  return $schema;
+}
+
+/**
+ * Add ability to disable AMP on individual node pages.
+ */
+function simple_amp_update_8001(&$sandbox) {
+  if (!db_table_exists('simple_amp_disabled')) {
+    drupal_install_schema('simple_amp');
+  }
+}
