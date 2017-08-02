@@ -94,6 +94,29 @@ class AmpBase {
     return $this;
   }
 
+  public function enableIndividualAmp() {
+    db_insert('simple_amp_disabled')
+      ->fields([
+        'nid' => $this->getEntity()->id(),
+      ])
+      ->execute();
+  }
+
+  public function disableIndividualAmp() {
+    db_delete('simple_amp_disabled')
+      ->condition('nid', $this->getEntity()->id())
+      ->execute();
+  }
+
+  public function individualAmpDisabled() {
+    $disabled = db_select('simple_amp_disabled', 'a')
+      ->fields('a', ['nid'])
+      ->condition('a.nid', $this->getEntity()->id())
+      ->execute()
+      ->fetchField();
+    return !empty($disabled);
+  }
+
   protected function renderEntityViewMode() {
     $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
     $view_builder = \Drupal::entityTypeManager()->getViewBuilder($this->getEntity()->getEntityTypeId());
