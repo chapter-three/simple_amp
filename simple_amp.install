@@ -10,7 +10,7 @@ function simple_amp_requirements($phase) {
       $requirements['amp_library'] = [
         'title'       => t('AMP PHP Library'),
         'value'       => t('Not available'),
-        'description' => t('The AMP module requires the PHP <a href="@library">AMP library</a>.',
+        'description' => t('The Simple AMP module requires the PHP <a href="@library">AMP library</a>.',
            ['@library' => 'https://github.com/Lullabot/amp-library']),
         'severity'    => REQUIREMENT_ERROR,
       ];
