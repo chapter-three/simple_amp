@@ -51,6 +51,12 @@ class AmpBase {
     return $url->toString();
   }
 
+  public function generateAmpURL() {
+    $options = ['absolute' => TRUE];
+    $url = Url::fromRoute('simple_amp.amp', ['entity' => $this->getEntity()->id()], $options);
+    return $url->toString();
+  }
+
   public function getContent() {
     return $this->content;
   }
@@ -100,12 +106,14 @@ class AmpBase {
         'nid' => $this->getEntity()->id(),
       ])
       ->execute();
+    return $this;
   }
 
   public function disableIndividualAmp() {
     db_delete('simple_amp_disabled')
       ->condition('nid', $this->getEntity()->id())
       ->execute();
+    return $this;
   }
 
   public function individualAmpDisabled() {

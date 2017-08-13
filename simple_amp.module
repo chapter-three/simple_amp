@@ -1,8 +1,8 @@
 <?php
 
-use Drupal\Core\Url;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\node\Entity\Node;
 use Drupal\node\NodeForm;
 use Drupal\simple_amp\AmpBase;
 
@@ -43,8 +43,8 @@ function simple_amp_form_alter(&$form, FormStateInterface $form_state, $form_id)
 function simple_amp_form_submit(array $form, FormStateInterface $form_state) {
   $amp = (new AmpBase())->setEntity($form_state->getFormObject()->getEntity());
   if (!empty($form_state->getValue('amp_disabled'))) {
-    $amp->disableIndividualAmp();
-    $amp->enableIndividualAmp();
+    $amp->disableIndividualAmp()
+      ->enableIndividualAmp();
   }
   else {
     $amp->disableIndividualAmp();
@@ -66,13 +66,11 @@ function simple_amp_page_attachments(array &$page) {
     $amp = (new AmpBase())->setEntity($entity);
     if ($amp->isAmpEnabled() && !$amp->individualAmpDisabled()) {
       // Add path to AMP version of articles
-      $options = ['absolute' => TRUE];
-      $url = Url::fromRoute('simple_amp.amp', ['entity' => $entity->id()], $options);
       $amp_link = [
         '#tag'        => 'link',
         '#attributes' => [
           'rel'  => 'amphtml',
-          'href' => $url->toString(),
+          'href' => $amp->generateAmpURL(),
         ],
       ];
       $page['#attached']['html_head'][] = [$amp_link, 'amp_link'];
