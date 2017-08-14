@@ -1,7 +1,15 @@
 services:
+
   plugin.manager.simple_amp_component:
     class: Drupal\simple_amp\AmpComponentManager
     parent: default_plugin_manager
+
   plugin.manager.simple_amp_metadata:
     class: Drupal\simple_amp\AmpMetadataManager
     parent: default_plugin_manager
+
+  path_processor.simple_amp:
+    class: Drupal\simple_amp\RouteProcessor\AmpRouteProcessor
+    arguments: ['@path.alias_manager']
+    tags:
+      - { name: route_processor_outbound, priority: 200 }
