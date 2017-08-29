@@ -5,3 +5,9 @@ services:
   plugin.manager.simple_amp_metadata:
     class: Drupal\simple_amp\AmpMetadataManager
     parent: default_plugin_manager
+  path.processor.simple_amp:
+    class: Drupal\simple_amp\AmpPathProcessor
+    arguments: ['@path_processor_alias', '@language_manager', '@config.factory']
+    tags:
+      - { name: path_processor_inbound, priority: 50 }
+      - { name: path_processor_outbound, priority: 50 }

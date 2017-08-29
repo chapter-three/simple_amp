@@ -69,6 +69,13 @@ class AmpSettingsForm extends ConfigFormBase {
 
     $node_types = $this->entityTypeManager->getStorage('node_type')->loadMultiple();
 
+    $form['url_alias'] = [
+      '#type'          => 'checkbox',
+      '#title'         => $this->t('Enable URL alias support'),
+      '#default_value' => !empty($config->get('url_alias')) ? $config->get('url_alias') : '',
+      '#description'   => $this->t('This option enables URL alias support for AMP paths. Example: <em>http://example.com/[node-alias]/amp</em> instead of <em>http://example.com/[node]/[nid]/amp</em>.'),
+    ];
+
     $form['node_types'] = [
       '#type'   => 'table',
       '#header' => [
