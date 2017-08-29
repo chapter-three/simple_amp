@@ -79,6 +79,12 @@ class AmpPathProcessor implements InboundPathProcessorInterface, OutboundPathPro
       return $path;
     }
 
+    if (is_null($request)) {
+      return $path;
+    }
+
+    $request_path = $this->getPath($request->getPathInfo());
+
     if (!$this->startsWith($request_path, '/node/') && !$this->endsWith($path, '/amp')) {
       return $path;
     }
