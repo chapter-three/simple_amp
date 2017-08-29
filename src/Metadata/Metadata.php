@@ -75,7 +75,7 @@ class Metadata extends Base {
 
   public function setAuthor($a) {
     if (is_array($a)) {
-      foreach ($authors as $author) {
+      foreach ($a as $author) {
         if (is_a($author, '\Drupal\simple_amp\Metadata\Author')) {
           $this->author[] = $author->build();
         }
@@ -94,8 +94,8 @@ class Metadata extends Base {
   }
 
   public function setPublisher($p) {
-    if (is_array($publisher)) {
-      foreach ($publishers as $publisher) {
+    if (is_array($p)) {
+      foreach ($p as $publisher) {
         if (is_a($publisher, '\Drupal\simple_amp\Metadata\Publisher')) {
           $this->publisher[] = $publisher->build();
         }
