@@ -52,16 +52,9 @@ class AmpBase {
   }
 
   public function generateAmpURL() {
-    $options = ['absolute' => TRUE];
-    if ($this->config->get('url_alias')) {
-      $path = Url::fromRoute('simple_amp.amp', ['entity' => $this->getEntity()->id()]);
-      $base_url = Url::fromRoute('<front>', [], $options);
-      return rtrim($base_url->toString(), '/') . $path->toString();
-    }
-    else {
-      $path = Url::fromRoute('simple_amp.amp', ['entity' => $this->getEntity()->id()], $options);
-      return $path->toString();
-    }
+    $path = Url::fromRoute('simple_amp.amp', ['entity' => $this->getEntity()->id()]);
+    $base_url = \Drupal::request()->getSchemeAndHttpHost();
+    return rtrim($base_url, '/') . $path->toString();
   }
 
   public function getContent() {
