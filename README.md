@@ -52,7 +52,7 @@ use Drupal\simple_amp\AmpComponentBase;
  * @AmpComponent(
  *   id = "amp-youtube",
  *   name = @Translation("YouTube"),
- *   default = false,
+ *   description = @Translation("YouTube Component"),
  *   regexp = {
  *     "/<amp\-youtube.*><\/amp\-youtube>/isU",
  *   }
