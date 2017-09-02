@@ -10,7 +10,7 @@ use Drupal\simple_amp\AmpComponentBase;
  * @AmpComponent(
  *   id = "amp-hulu",
  *   name = @Translation("Hulu"),
- *   default = false,
+ *   description = @Translation("Enables JS to display a simple embedded Hulu video"),
  *   regexp = {
  *     "/<amp\-hulu.*><\/amp\-hulu>/isU",
  *   }

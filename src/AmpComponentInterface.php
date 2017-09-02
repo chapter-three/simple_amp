@@ -17,18 +17,18 @@ interface AmpComponentInterface extends PluginInspectionInterface {
   public function getName();
 
   /**
+   * Return description for the AMP Component.
+   *
+   * @return string
+   */
+  public function getDescription();
+
+  /**
    * Return an array of regular expressions for the amp component.
    *
    * @return array regexp
    */
   public function getRegexp();
-
-  /**
-   * Check if component loaded by default.
-   *
-   * @return boolean
-   */
-  public function isDefault();
 
   /**
    * Return AMP component Javascript.

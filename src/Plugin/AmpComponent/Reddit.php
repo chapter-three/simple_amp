@@ -10,7 +10,7 @@ use Drupal\simple_amp\AmpComponentBase;
  * @AmpComponent(
  *   id = "amp-reddit",
  *   name = @Translation("Reddit"),
- *   default = false,
+ *   description = @Translation("Enables JS to display a Reddit comment or post embed"),
  *   regexp = {
  *     "/<amp\-reddit.*><\/amp\-reddit>/isU",
  *   }

@@ -10,7 +10,7 @@ use Drupal\simple_amp\AmpComponentBase;
  * @AmpComponent(
  *   id = "amp-analytics",
  *   name = @Translation("Analytics"),
- *   default = true,
+ *   description = @Translation("Enables JS to capture analytics data from an AMP document"),
  *   regexp = {}
  * )
  */

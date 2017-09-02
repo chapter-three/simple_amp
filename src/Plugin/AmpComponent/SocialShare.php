@@ -10,7 +10,7 @@ use Drupal\simple_amp\AmpComponentBase;
  * @AmpComponent(
  *   id = "amp-social-share",
  *   name = @Translation("SocialShare"),
- *   default = true,
+ *   description = @Translation("Enables JS to display a social share button"),
  *   regexp = {}
  * )
  */

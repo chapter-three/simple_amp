@@ -12,8 +12,13 @@ This module has been released on Drupal.org, see [Simple AMP](https://goo.gl/UNR
 
 - Create new `Display Mode` for your entity that will support AMP. New View modes can be created via `/admin/structure/display-modes/view`.
 - Enable newly created View mode on entity `Manage Display` page. Example path: `/admin/structure/types/manage/article/display`
-- Open Simple AMP Settings page and enable entity type that supports AMP and choose `Display Mode` for it. `/admin/config/services/simple-amp`.
+- Open Simple AMP Entity Types page and enable entity type that supports AMP and choose `Display Mode` for it. `/admin/config/services/simple-amp`.
+- Open Components settings page and enable default components. `/admin/config/services/simple-amp/components`.
 - Hit `Save configuration` and you're all set.
+
+## URL alias
+
+If you would like to have URL alias in the path /node-alias/amp instead of /node/[nid]/amp please install [Sub-pathauto (Sub-path URL Aliases)](https://www.drupal.org/project/subpathauto)
 
 ## Theming
 
