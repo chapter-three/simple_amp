@@ -36,7 +36,7 @@ Here is example:
 The key variables here are:
 
 - name - plugin name
-- default - true/false (when set to TRUE plugin will include javascript from getElement() method to HTML header.
+- description - plugin description.
 - regexp - array of regular expressions to match in HTML body.
 
 ```

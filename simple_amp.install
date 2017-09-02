@@ -68,17 +68,7 @@ function simple_amp_update_8001(&$sandbox) {
  */
 function simple_amp_update_8002(&$sandbox) {
   $config = \Drupal::configFactory()->getEditable('simple_amp.settings');
-  $config->set('component_amp-analytics_enable', 1)->save();
-  $config->set('component_amp-social-share_enable', 1)->save();
-  return t('Default AMP components successfully enabled.');
-}
-
-/**
- * Set default configuration options.
- */
-function simple_amp_update_8003(&$sandbox) {
-  $config = \Drupal::configFactory()->getEditable('simple_amp.settings');
-  $config->set('component_amp-analytics_enable', 1)->save();
-  $config->set('component_amp-social-share_enable', 1)->save();
+  $config->set('component_amp-analytics_enable', TRUE)->save();
+  $config->set('component_amp-social-share_enable', TRUE)->save();
   return t('Default AMP components successfully enabled.');
 }
