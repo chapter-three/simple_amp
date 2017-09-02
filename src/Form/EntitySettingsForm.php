@@ -11,9 +11,9 @@ use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Configure AMP settings.
+ * Configure AMP Entity settings.
  */
-class AmpSettingsForm extends ConfigFormBase {
+class EntitySettingsForm extends ConfigFormBase {
 
   protected $entityTypeManager;
   protected $entityFieldManager;

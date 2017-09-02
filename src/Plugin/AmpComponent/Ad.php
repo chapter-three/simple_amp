@@ -10,7 +10,7 @@ use Drupal\simple_amp\AmpComponentBase;
  * @AmpComponent(
  *   id = "amp-ad",
  *   name = @Translation("Advertisement"),
- *   default = false,
+ *   description = @Translation("Enables JS to display ads"),
  *   regexp = {}
  * )
  */

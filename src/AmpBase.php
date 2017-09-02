@@ -65,6 +65,10 @@ class AmpBase {
     return $this->config->get($this->getEntity()->bundle() . '_view_mode');
   }
 
+  public function isComponentEnabled($id) {
+    return (bool) $this->config->get('component_' . $id . '_enable');
+  }
+
   public function isAmpEnabled() {
     return (bool) $this->config->get($this->getEntity()->bundle() . '_enable');
   }
@@ -138,30 +142,30 @@ class AmpBase {
     $plugins = $manager->getDefinitions();
 
     // Find component.
-    foreach ($plugins as $id => $plugin) {
-      $plugin = $manager->createInstance($plugin['id']);
-
-      $regexp = $plugin->getRegexp();
-
-      if ($plugin->isDefault()) {
+    foreach ($plugins as $plugin) {
+      $id = $plugin['id'];
+      $plugin = $manager->createInstance($id);
+      if ($this->isComponentEnabled($id)) {
         if ($element = $plugin->getElement()) {
           $this->scripts[] = $element;
         }
       }
 
-      $component = [];
-      if (!is_array($regexp)) {
-        $component['regexp'][] = $regexp;
-      }
-      else {
-        $component['regexp'] = $regexp;
-      }
+      if ($regexp = $plugin->getRegexp()) {
+        $component = [];
+        if (!is_array($regexp)) {
+          $component['regexp'][] = $regexp;
+        }
+        else {
+          $component['regexp'] = $regexp;
+        }
 
-      // Try all regular expressions.
-      foreach ($component['regexp'] as $delta => $regexp) {
-        if (preg_match($regexp, $this->html, $matches) || preg_match($regexp, $this->content, $matches)) {
-          if ($element = $plugin->getElement()) {
-            $this->scripts[] = $element;
+        // Try all regular expressions.
+        foreach ($component['regexp'] as $delta => $regexp) {
+          if (preg_match($regexp, $this->html, $matches) || preg_match($regexp, $this->content, $matches)) {
+            if ($element = $plugin->getElement()) {
+              $this->scripts[] = $element;
+            }
           }
         }
       }

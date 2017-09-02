@@ -10,10 +10,18 @@ simple_amp.amp:
     _permission: 'access simple amp'
     entity: \d+
 
-simple_amp.settings:
+simple_amp.settings.entity:
   path: '/admin/config/services/simple-amp'
   defaults:
-    _form: '\Drupal\simple_amp\Form\AmpSettingsForm'
-    _title: 'Simple AMP Settings'
+    _form: '\Drupal\simple_amp\Form\EntitySettingsForm'
+    _title: 'Simple AMP'
+  requirements:
+    _permission: 'administer simple amp'
+
+simple_amp.settings.components:
+  path: '/admin/config/services/simple-amp/components'
+  defaults:
+    _form: '\Drupal\simple_amp\Form\ComponentSettingsForm'
+    _title: 'Simple AMP'
   requirements:
     _permission: 'administer simple amp'

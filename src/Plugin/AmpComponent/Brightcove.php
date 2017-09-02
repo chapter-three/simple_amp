@@ -10,7 +10,7 @@ use Drupal\simple_amp\AmpComponentBase;
  * @AmpComponent(
  *   id = "amp-brightcove",
  *   name = @Translation("Brightcove"),
- *   default = false,
+ *   description = @Translation("Enables JS to display the Brightcove Player"),
  *   regexp = {
  *     "/<amp\-brightcove.*><\/amp\-brightcove>/isU",
  *   }
