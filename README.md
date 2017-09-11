@@ -36,7 +36,7 @@ Here is example:
 The key variables here are:
 
 - name - plugin name
-- default - true/false (when set to TRUE plugin will include javascript from getElement() method to HTML header.
+- description - plugin description.
 - regexp - array of regular expressions to match in HTML body.
 
 ```
@@ -52,7 +52,7 @@ use Drupal\simple_amp\AmpComponentBase;
  * @AmpComponent(
  *   id = "amp-youtube",
  *   name = @Translation("YouTube"),
- *   default = false,
+ *   description = @Translation("YouTube Component"),
  *   regexp = {
  *     "/<amp\-youtube.*><\/amp\-youtube>/isU",
  *   }
