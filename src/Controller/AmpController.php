@@ -36,7 +36,8 @@ class AMPController extends ControllerBase {
         ->parse();
       if ($this->amp->isAmpEnabled()) {
         $response = new Response();
-        $markup = $this->renderer->render($this->assembleAmpPage());
+        $pagearray = $this->assembleAmpPage();
+        $markup = $this->renderer->render($pagearray);
         $response->setContent($markup->__toString());
         return $response;
       }
