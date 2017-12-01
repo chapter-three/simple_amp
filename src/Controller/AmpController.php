@@ -62,6 +62,16 @@ class AMPController extends ControllerBase {
         'canonical' => $this->amp->getCanonicalUrl(),
         'ga'        => $this->amp->getGoogleAnalytics(),
       ],
+      '#cache' => [
+        'contexts' => [
+          'url',
+          'url.site',
+          'url.query_args',
+        ],
+        'tags' => [
+          'node:' . $entity->id(),
+        ],
+      ],
     ];
   }
 
