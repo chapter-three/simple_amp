@@ -29,6 +29,10 @@
 </head>
 <body>
 
+{% if params.gtm %}
+  <amp-analytics config="https://www.googletagmanager.com/amp.json?id={{ params.gtm }}>m.url=SOURCE_URL" data-credentials="include"></amp-analytics>
+{% endif %}
+
 <main>
   <div class="heading">
 

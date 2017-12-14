@@ -19,6 +19,7 @@ class AmpBase {
   protected $metadata_manager;
   protected $config;
   protected $ga;
+  protected $gtm;
 
   // Default and absolutely must scripts.
   protected $scripts = [
@@ -30,6 +31,7 @@ class AmpBase {
     $this->metadata_manager = \Drupal::service('plugin.manager.simple_amp_metadata');
     $this->config = \Drupal::config('simple_amp.settings');
     $this->ga = \Drupal::config('google_analytics.settings')->get('account');
+    $this->gtm = \Drupal::config('google_tag.settings')->get('container_id');
   }
 
   public function setEntity($entity) {
@@ -75,6 +77,10 @@ class AmpBase {
 
   public function getGoogleAnalytics() {
     return $this->ga;
+  }
+
+  public function getGoogleTagManager() {
+    return $this->gtm;
   }
 
   public function getMetadata() {
