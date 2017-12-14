@@ -29,8 +29,10 @@
 </head>
 <body>
 
-{% if params.gtm %}
-  <amp-analytics config="https://www.googletagmanager.com/amp.json?id={{ params.gtm }}&m.url=SOURCE_URL" data-credentials="include"></amp-analytics>
+{# Google Tag Manager - Specify your GTM ID here: #}
+{% set gtm_container_id = '' %}
+{% if gtm_container_id %}
+  <amp-analytics config="https://www.googletagmanager.com/amp.json?id={{ gtm_container_id }}&m.url=SOURCE_URL" data-credentials="include"></amp-analytics>
 {% endif %}
 
 <main>

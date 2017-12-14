@@ -61,7 +61,6 @@ class AMPController extends ControllerBase {
         'scripts'   => $this->amp->getScripts(),
         'canonical' => $this->amp->getCanonicalUrl(),
         'ga'        => $this->amp->getGoogleAnalytics(),
-        'gtm'       => $this->amp->getGoogleTagManager(),
       ],
       '#cache' => [
         'contexts' => [
